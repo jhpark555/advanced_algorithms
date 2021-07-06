@@ -17,6 +17,7 @@ void findSubArray(int arr[],int n)
 
       for(k=i;k<=j;k++)
       {
+      //  if(j-1 <3) break;
         visited[arr[k]]++;
         if(visited[arr[k]]<2)
         printf("%d ",arr[k]);
