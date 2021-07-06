@@ -1,6 +1,7 @@
 //https://www.techiedelight.com/find-first-non-repeating-character-string-one-traversal/
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 char findNonRepeatingChar(char s[],int n)
 {

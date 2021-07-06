@@ -3,7 +3,7 @@
 
 void findFrequency(int arr[], int n)
 {
-  int map[11]={0};
+  int map[50]={0};
   int i;
 
   for(i=0;i<n;i++)
