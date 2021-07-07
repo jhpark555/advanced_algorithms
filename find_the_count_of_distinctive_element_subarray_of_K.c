@@ -52,8 +52,8 @@ void findDistinctCount( int arr[],int n,int k)
 
        for( x=i; x<=j; x++)
        {
-         if(j-i!= k-1) break;
-         visited[arr[x]]++;
+         if(j-i!= k-1) break;     //check it's over k element
+         visited[arr[x]]++;      // record already checked element
          //if(visited[arr[x]]==1)
          if((arr[x] > max) && (visited[arr[x]]==1)) max= arr[x];
          printf("%d ",arr[x]);
