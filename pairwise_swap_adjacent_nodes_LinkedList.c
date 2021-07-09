@@ -68,7 +68,7 @@ void rearrange(struct node **headref)
 
     if(prev==NULL) *headref=Next;
     else    prev->next=Next;
-    
+
     prev=curr;
     curr=curr->next;
   }
