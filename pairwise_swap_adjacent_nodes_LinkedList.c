@@ -1,4 +1,4 @@
-//https://www.geeksforgeeks.org/bubble-sort-for-linked-list-by-swapping-nodes/
+//https://www.techiedelight.com/pairwise-swap-adjacent-nodes-linked-list/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -54,43 +54,41 @@ struct node *swap(struct node *N1,struct node *N2)
   return N2;
 }
 
-void bubbleSort(struct node **headref,int n)
+void rearrange(struct node **headref)
 {
-  struct node **h;
-  int i,j;
+  struct node *curr=*headref;
+  struct node *prev=NULL;
+  struct node *Next=NULL;
 
-  for(i=0;i<n;i++)
+  while(curr!=NULL && curr->next!=NULL)
   {
-    h=headref;
-    printf("*%d \n",(*h)->data);
-    for(j=0;j<n-i-1;j++)
-    {
-      struct node *p1=*h;
-      struct node *p2=p1->next;
-      if(p1->data > p2->data) {
-        *h=swap(p1,p2);
-      }
-      h=&(*h)->next;
-    }
-  }
+    Next=curr->next;
+    curr->next=Next->next;
+    Next->next=curr;
 
+    if(prev==NULL) *headref=Next;
+    else    prev->next=Next;
+    
+    prev=curr;
+    curr=curr->next;
+  }
 }
+
+
 int main()
 {
-  // input coordinates
-   int arr[]={78,20,10,32,1,5};
-   int n = sizeof(arr) / sizeof(arr[0]);
-   int i;
+    int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    unsigned n = sizeof(arr)/sizeof(arr[0]);
+    int i;
 
+    struct node* head = NULL;
+    for (i = n - 1; i >= 0; i--) {
+        push(&head, arr[i]);
+    }
 
-   struct node* head = NULL;
-   for (i = n - 1; i >= 0; i--) {
-       push(&head, arr[i]);
-   }
-
-   printList(head); printf("\n");
-   bubbleSort(&head,n); printf("\n");
-//   KreverseList(&head,k);printf("\n");
+    printList(head);
+    rearrange(&head);
+    printf("\n");
     printList(head);
   return 0;
 
