@@ -19,7 +19,7 @@ char *longestPalindrome(char *s,int n)
   int count[256]={0};
   for(i=0; i<n; i++){
    count[s[i]]++;
-   printf("%d %d ",s[i],count[s[i]]);
+   printf("%c %d ",s[i],count[s[i]]);
  }
 
   char beg[10],mid[10],end[10];
