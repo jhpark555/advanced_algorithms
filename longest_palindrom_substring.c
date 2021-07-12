@@ -2,71 +2,48 @@
 #include <stdlib.h>
 #include<string.h>
 
-//#define swap(a,b) (a^=b^=a^=b)
-
-char * reverse(char s[],int m)
-{
-  int i,j;
-  static char t[sizeof(m)];
-
-  //printf("**%d \n",m);
-  //for(i=0,j=m-1;i<j;i++,j--)
-  for(i=m-1;i>=0;i--)
-  {
-     t[i]=s[i];
-     printf("%c",t[i]);
-   }
-
- return  t;
-
-}
-int compare(char a[],char b[],int m)
-{
-  int i;
-  int count=0;
-//printf("%s %s  ",a,b);
- for(i=0; i<m;i++)
- {
-  // printf("%c%c, ",a[i],b[i]);
-   if(a[i]!=b[i]) {
-    // printf("%c%c, ",a[i],b[i]);
-     return 0;
-   }
-   count++;
- }
- //printf("*%d ",count);
- return 1;
-}
-
 int longestPalSubstr(char str[],int n)
 {
-   int i,j,k,m;
+   int i,j,k,m,x;
    int ret=0;
    char normal[n];
    char rev[n];
+   int max =-1;
 
    for(i=0; i<n ;i++)
     for(j =i ; j <n; j++)
     {
-      printf("(");
+      max=-1;
+      //printf("(");
       memset(normal,0,sizeof(n));
       memset(rev,0,sizeof(n));
 
       for(k=i;k<=j;k++)
       {
         normal[k-i]=str[k];
-          printf("%c",normal[k-i]);
+         //printf("%c",normal[k-i]);
       }
-      printf(":");
+      //printf(":");
       for(k=j;k>=i;k--)
       {
-       rev[k-j]=str[k];
-        printf("%c",rev[k-j]);
+       rev[j-k]=str[k];
+        //printf("%c",rev[j-k]);
       }
       m=j-i+1;
-    //  rev=reverse(normal,m);
-      if( compare(normal,rev,m) ) printf(":Palindrom ");
-      printf(")\n");
+      //printf(">>%c %c ",normal[0],rev[0]);
+
+      for(x=0;x<m;x++){
+        if(normal[x]!=rev[x]){    //it's not palindrom
+            break;
+        }
+      }
+      if(x==m){       // Yes it's palindrom
+        if(x>max) max=x;   //need to check max substrig
+      printf("\t\tPalindrom %d : ",max);
+      for(x=0;x<m;x++) printf("%c",normal[x]);
+        printf("\n");
+      }
+      //printf(")\n");
 
     }
   return ret;
