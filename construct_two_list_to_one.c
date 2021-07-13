@@ -81,7 +81,7 @@ struct node  *shuffleMerge(struct node *aref,struct node *bref)
       movenode(lastptr,&pb);
       lastptr=&((*lastptr)->next);
     }
-//    temp->next=NULL;
+
   return temp;
 }
 
