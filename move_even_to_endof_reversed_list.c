@@ -1,4 +1,4 @@
-//https://www.techiedelight.com/pairwise-swap-adjacent-nodes-linked-list/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,6 +17,7 @@ void printList(struct node *head)
     printf("%d->",curr->data);
     curr=curr->next;
   }
+  printf("NULL");
 }
 
 void push(struct node **head,int data)
@@ -54,40 +55,46 @@ struct node *swap(struct node *N1,struct node *N2)
   return N2;
 }
 
-void rearrange(struct node **headref)
-{
-  struct node *curr=*headref;
-  struct node dummy;
-  struct node *temp=&dummy;
-
-  while(curr!=NULL)
-  {
-    if(curr->data &1)  //odd
-     movenode(&temp,&curr);
-     curr=curr->next;
-  }
-   *headref=temp;
-}
-
 void movenode(struct node **dst,struct node **src)
 {
   struct node *temp;
 
+  if(*src ==NULL) return ;
   temp=*src;
   (*src)=(*src)->next;
   temp->next=*dst;
   *dst=temp;
 }
 
+void rearrange(struct node **headref)
+{
+  struct node *curr=*headref;
+  struct node *even=NULL;
+  struct node *prev=NULL;
+
+
+  while(curr!=NULL && curr->next!=NULL )
+  {
+    movenode(&even,&(curr->next));
+    prev=curr;
+    curr=curr->next;
+  }
+   if(curr) curr->next=even;
+   else prev->next=even;
+//printf("\n++++++++++\n");
+   //printList(even);
+}
+
 int main()
 {
   // input keys
-  int keys[] = { 1, 2, 3, 4, 5, 6, 7 };
+  int keys[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
   int n = sizeof(keys)/sizeof(keys[0]);
+  int i;
 
   // construct the first linked list
-  struct Node* head = NULL;
-  for (int i = n-1; i >= 0; i--) {
+  struct node* head = NULL;
+  for (i = n-1; i >= 0; i--) {
       push(&head, keys[i]);
   }
 
@@ -97,7 +104,7 @@ int main()
   // rearrange the pointers of a given list
   rearrange(&head);
 
-  printf("After: ");
+  printf("\nAfter: ");
   printList(head);
 
   return 0;
