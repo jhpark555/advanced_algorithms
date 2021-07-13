@@ -90,13 +90,14 @@ int main()
   // input keys
    int keys[] = { 1, 2, 3, 4, 5, 6, 7 };
    int n = sizeof(keys)/sizeof(keys[0]);
+   int i;
 
    struct node *a = NULL, *b = NULL;
-   for (int i = n - 1; i >= 0; i = i - 2) {
+   for (i = n - 1; i >= 0; i = i - 2) {
        push(&a, keys[i]);
    }
 
-   for (int i = n - 2; i >= 0; i = i - 2) {
+   for ( i = n - 2; i >= 0; i = i - 2) {
        push(&b, keys[i]);
    }
 
