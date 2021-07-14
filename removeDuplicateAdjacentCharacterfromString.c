@@ -4,36 +4,40 @@
 #include <stdlib.h>
 #include <string.h>
 
-void removeDuplicates(char s[])
+char *removeDuplicates(char s[])
 {
   int n= strlen(s);
   char dp[226]={0};
   int k=0;
   int i;
-  int m=0;
+
+  static char ret[sizeof n];
 
   for(i=0; i<n;i++)
   {
     dp[s[i]]++;
   }
   for(i=0;i<n; i++){
-  //  printf("%d ",dp[s[i]]);
-   if(dp[s[i]]==1) printf("%c",s[i]);
+    //printf("%d ",dp[s[i]]);
+   if(dp[s[i]]==1){
+      ret[k++]=s[i];
+    //  printf("%c",s[i]);
+    }
   }
-  s[k]='\0';
 
+return ret;
 }
 
 int main()
 {
-  //char S[] = "AAABBCDDDEFFF";
+//  char S[] = "AAABBCDDDEFFF";
   //char S[]="azzxzy";
-  char S[]="azxxzy";
-//char S[]="aaabccddd";
+//  char S[]="azxxzy";
+char S[]="aaabccddd";
 
-  removeDuplicates(S);
+  char *ret=removeDuplicates(S);
 
-  printf("%s", S);
+  printf("%s", ret);
 
 
   return 0;
