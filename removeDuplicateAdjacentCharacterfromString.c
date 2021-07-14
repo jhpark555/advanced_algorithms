@@ -33,7 +33,7 @@ int main()
 //  char S[] = "AAABBCDDDEFFF";
   //char S[]="azzxzy";
 //  char S[]="azxxzy";
-char S[]="aaabccddd";
+  char S[]="aaabccddd";
 
   char *ret=removeDuplicates(S);
 
