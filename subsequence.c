@@ -23,6 +23,7 @@ void findPowerSet( char s[],int n)
 int main()
 {
   char str[]="apple";
+//  char str[]={1,2,3,4,5};
   int n=strlen(str);
   findPowerSet(str,n);
 
