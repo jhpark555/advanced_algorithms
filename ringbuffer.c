@@ -26,6 +26,10 @@ ringbuf_flush(ringbuf_t *p)
   p->read =0;
   p->remaining =0;
 }
+//
+//                read            remain              size
+//      |          |                |                  |
+//                                cursor
 int
 ringbuf_write(ringbuf_t *p, char *bytes, size_t size)
 {
@@ -61,7 +65,7 @@ ringbuf_read_int(ringbuf_t *p, char *bytes,size_t size, int keep)
 
   size_t rb=size;
   printf("#p->read= %d ,p->remaining=%d \n",p->read,p->remaining);
-  if(p->size -p->read >= size ){
+  if(p->size - p->read >= size ){
     memcpy(bytes,p->bytes + p->read, size);
     if(!keep) {
       p->read += size;
