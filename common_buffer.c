@@ -28,6 +28,7 @@ void FifoRead(char *buff, int len)
  int ret=   fread(buff,1,len,fp);
  printf("+ret= %d \n",ret);
 }
+
 buffer_t *buf_create(size_t len)
 {
   buffer_t* buf=(buffer_t *)malloc(sizeof(*buf));
@@ -199,18 +200,30 @@ int main(int argc, char *argv[])
    stream=buf_create(SIZE);
    fp=fopen("short.wma","rb");
    size_t ret= buf_read(buff,1,16,stream);
+   printf("** read_pos=%x  base=%x\n",stream->read_pos,stream->base);
    for(int i=0;i <16; i++ ) printf("%02x ",buff[i]);
    printf("\n");
    buf_seek_rel(stream, 16);
 
    buf_read(buff,1,16,stream);
+     printf("** read_pos=%x  base=%x\n",stream->read_pos,stream->base);
    for(int i=0;i <16; i++ ) printf("%02x ",buff[i]);
    printf("\n");
 
-   fill_read_buffer(stream);
+  // fill_read_buffer(stream);
+
+   buf_read(buff,1,16,stream);
+     printf("** read_pos=%x  base=%x\n",stream->read_pos,stream->base);
+    buf_read(buff,1,16,stream);
+      printf("** read_pos=%x  base=%x\n",stream->read_pos,stream->base);
    for(int i=0;i <16; i++ ) printf("%02x ",buff[i]);
    printf("\n");
-
+ printf("++++++++++++++read_pos returned to base\n");
+   stream->read_pos=stream->base;
+   buf_read(buff,1,16,stream);
+   printf("** read_pos=%x  base=%x\n",stream->read_pos,stream->base);
+   for(int i=0;i <16; i++ ) printf("%02x ",buff[i]);
+   printf("\n");
 
    buf_destroy(stream);
    return 0;
